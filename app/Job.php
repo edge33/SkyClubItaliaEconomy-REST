@@ -9,7 +9,7 @@ class Job extends Model
     public $timestamps = false;
 
     public function users () {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\User');
     }
 
     public function requiredRank () {
@@ -17,6 +17,6 @@ class Job extends Model
     }
 
     public function requiredLicenses () {
-        return $this->hasMany('App\License');
+        return $this->belongsToMany('App\License');
     }
 }

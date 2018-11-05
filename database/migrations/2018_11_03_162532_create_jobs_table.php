@@ -15,6 +15,7 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('user_username');
             $table->string('title');
             $table->longText('description');
             $table->string('departure', 4);
@@ -22,6 +23,7 @@ class CreateJobsTable extends Migration
             $table->string('category');
             $table->string('limitations');
             $table->unsignedInteger('required_rank');
+            $table->foreign('user_username')->references('username')->on('users');
         });
     }
 
