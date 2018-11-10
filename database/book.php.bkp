@@ -1,0 +1,210 @@
+<?php
+$tessera = $_GET['id'];
+$i = 1;
+$fileName = "pics/Tessera_".$tessera."_$i.png";
+
+if(file_exists($fileName)) {
+	do {
+		$i++;
+		$fileName = "pics/Tessera_".$tessera."_$i.png";
+	}while(file_exists($fileName));
+} else {
+	die("What?");
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Licenses</title>
+	<meta name="Author" content="Gerard Ferrandez at http://www.dhteumeuleu.com">
+	<meta http-equiv="imagetoolbar" content="no">
+	<style type="text/css">
+
+	<!-- 
+		html {
+			overflow: hidden;
+		}
+		body {
+			margin: 0px;
+			padding: 0px;
+			background: #111;
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			cursor: crosshair;
+		}
+		#center {
+			position:absolute;
+			left: 50%;
+			top: 50%;
+		}
+		#DHTMLBOOK {
+			position: relative;
+			background: #000;
+			width: 640px;
+			height: 480px;
+			left: -320px;
+			top: -240px;
+			visibility: hidden;
+		}
+		#TXTBOX {
+			position: absolute;
+			font-family: verdana;
+			color: #aba193;
+			font-size: .8em;
+			width: 410px;
+			text-align: center;
+			top: 320px;
+		}
+		.page {
+			position: absolute;
+			cursor: pointer;
+			overflow: hidden;
+			width: 50%;
+			height: 100%;
+			border-left: #000000 solid 1px;
+		}
+		.right {
+			left: 50%;
+			border-right: #000000 solid 1px;
+		}
+		.turn {
+			background: #000000;
+		}
+		.img {
+			position: absolute;
+			height: 100%;
+			width: 200%;
+		}
+	 -->	
+		
+	</style>
+
+	<script type="text/javascript">
+	 <!--  
+	// ============================================================
+	//   __|     _ |     |           |
+	//  (_ |  -_)  |  _` |  _ \  _ \  _|
+	// \___|\___| _|\__,_|\___/\___/\__|
+	// ============================================================
+	// script: Gerard Ferrandez - Ge-1-doot - August 2oo3
+	// http://www.dhteumeuleu.com
+	// ============================================================
+	// Prelevato, spiegato ed illustrato su http://www.web-link.it
+	// ============================================================
+
+
+	document.onselectstart = function () { return false; }
+
+	var nI  = 0;
+	var kI  = 0;
+	var run = false;
+
+	function setOpacity(obj,o) {
+		if (o<0) o=0; else if (o>100) o = 100;
+		if (obj.filters)obj.filters.alpha.opacity=o; else obj.style.opacity = o/100;
+	}
+	function TPR__(p) {
+		P1.style.left  = 50-(2.5*p)+"%";
+		P1.style.width = (2.5*p)+"%";
+		setOpacity(P1i, .5*p*p);
+		if (p == 20) run = false;
+	}
+	function TPR_(p) {
+		P2.style.width = 50-(2.5*p)+"%";
+		setOpacity(P2i, 100-.5*(p*p));
+		if (p == 20) {
+			P2i.src = IMGSRC[kI].src;
+			setOpacity(P2i, 100);
+			P2.style.width = "50%";
+			for(var i=1; i<=20; i++) setTimeout("TPR__("+i+")", i*32);
+		}
+	}
+	function TPR() {
+		if (!run) {
+			run = true;
+			P01i.src = IMGSRC[kI].src;
+			P1.style.width = 0;
+			kI++;
+			if (kI>=nI) kI = 0;
+			titLe(kI);
+			P02i.src = IMGSRC[kI].src;
+			P1i.src  = IMGSRC[kI].src;
+			for (var i=1; i<=20; i++) setTimeout("TPR_("+i+")", i*32);
+		} else setTimeout("TPR()", 100);
+	}
+
+	function TPL__(p) {
+		P2.style.width = (2.5*p)+"%";
+		setOpacity(P2i, .5*p*p);
+		if (p == 20) run = false;
+	}
+	function TPL_(p) {
+		P1.style.left  = (2.5*p)+"%";
+		P1.style.width = 40+(10-2.5*p)+"%";
+		setOpacity(P1i, 100-.5*(p*p));
+		if (p == 20) {
+			P1i.src = IMGSRC[kI].src;
+			setOpacity(P1i, 100);
+			P1.style.left  = 0;
+			P1.style.width = "50%";
+			for(var i=1; i<=20; i++) setTimeout("TPL__("+i+")", i*32);
+		}
+	}
+	function TPL() {
+		if (!run) {
+			run = true;
+			P02i.src = IMGSRC[kI].src;
+			P2.style.width = 0;
+			kI--;
+			if (kI < 0) kI = nI-1;
+			titLe(kI);
+			P01i.src = IMGSRC[kI].src;
+			P2i.src  = IMGSRC[kI].src;
+			for(var i=1; i<=20; i++) setTimeout("TPL_("+i+")", i*32);
+		} else setTimeout("TPL()", 100);
+	}
+	function titLe(p) {
+		document.getElementById("TXTBOX").innerHTML = IMGSRC[p].alt;
+	}
+	onload = function() {
+		IMGSRC  = document.getElementById("imgsrc").getElementsByTagName("img");
+		DB      = document.getElementById("DHTMLBOOK");
+		P01     = DB.getElementsByTagName("span")[0];
+		P01i    = P01.getElementsByTagName("img")[0];
+		P02     = DB.getElementsByTagName("span")[1];
+		P02i    = P02.getElementsByTagName("img")[0];
+		P1      = DB.getElementsByTagName("span")[2];
+		P1i     = P1.getElementsByTagName("img")[0];
+		P2      = DB.getElementsByTagName("span")[3];
+		P2i     = P2.getElementsByTagName("img")[0];
+		nI      = IMGSRC.length;
+		P1i.src = IMGSRC[kI].src;
+		P2i.src = IMGSRC[kI].src;
+		titLe(kI);
+		DB.style.visibility = "visible";
+	}
+	// -->
+	</script>
+
+</head>
+<body>
+<div id="center">
+	<div id="DHTMLBOOK">
+		<span class="page" onmousedown="return false;" ondblclick="TPL();" onclick="TPL();"><img class="img"></span>
+		<span class="page right" onmousedown="return false;" ondblclick="TPR();" onclick="TPR();"><img class="img" style="left:-100%"></span>
+		<span class="page turn" onmousedown="return false;" ondblclick="TPL();" onclick="TPL();"><img class="img" style="opacity:1;filter:alpha()"></span>
+		<span class="page turn right" onmousedown="return false;" ondblclick="TPR();" onclick="TPR();"><img class="img" style="opacity:1;filter:alpha();left:-100%"></span>
+		<div id="TXTBOX"></div>
+	</div>
+</div>
+<div id="imgsrc" style="visibility:hidden;">
+<?php
+for($j = 1; $j < $i; $j++) {
+	$fileName = "pics/Tessera_".$tessera."_$j.png";
+	echo "<img src='$fileName'>";
+}
+?>
+</div>
+</body>
+</html>
