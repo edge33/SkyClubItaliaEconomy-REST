@@ -20,3 +20,7 @@ Route::middleware('auth:    api')->get('/user', function (Request $request) {
 });
 
 Route::get('jobs', 'JobController@index');
+Route::get('jobs/{job}', 'JobController@get');
+Route::post('jobs', 'JobController@save');
+Route::put('jobs/{job}', 'JobController@update');
+Route::delete('jobs/{job}', 'JobController@delete');
