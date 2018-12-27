@@ -11,14 +11,6 @@ class User extends Authenticatable
     use Notifiable;
 
     public $timestamps = false;
-
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'username';
-
     /**
      * The attributes that are mass assignable.
      *
