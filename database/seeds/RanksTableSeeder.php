@@ -16,10 +16,6 @@ class RanksTableSeeder extends Seeder
         DB::table('ranks')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-
-        $faker = \Faker\Factory::create();
-
-
         Rank::create([
             'rank_name' => 'Novice'
         ]);
