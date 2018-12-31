@@ -24,3 +24,8 @@ Route::get('jobs/{job}', 'JobController@get');
 Route::post('jobs', 'JobController@save');
 Route::put('jobs/{job}', 'JobController@update');
 Route::delete('jobs/{job}', 'JobController@delete');
+
+Route::get('ranks', 'RankController@index');
+Route::get('ranks/{rank}', 'RankController@get');
+Route::post('ranks', 'RankController@save');
+Route::put('ranks/{rank}', 'RankController@update');
