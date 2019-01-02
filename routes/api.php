@@ -29,3 +29,10 @@ Route::get('ranks', 'RankController@index');
 Route::get('ranks/{rank}', 'RankController@get');
 Route::post('ranks', 'RankController@save');
 Route::put('ranks/{rank}', 'RankController@update');
+Route::delete('ranks/{rank}', 'RankController@delete');
+
+Route::get('licenses', 'LicenseController@index');
+Route::get('licenses/{license}', 'LicenseController@get');
+Route::post('licenses', 'LicenseController@save');
+Route::put('licenses/{license}', 'LicenseController@update');
+Route::delete('licenses/{license}', 'LicenseController@delete');

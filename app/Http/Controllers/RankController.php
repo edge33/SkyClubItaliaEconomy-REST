@@ -24,4 +24,10 @@ class RankController extends Controller
         $rank->update($request->all());
         return response()->json($rank, 200);
     }
+
+    public function delete(Rank $rank)
+    {
+        $rank->delete();
+        return response()->json(null, 204);
+    }
 }

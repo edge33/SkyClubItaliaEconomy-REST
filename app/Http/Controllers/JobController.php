@@ -27,4 +27,10 @@ class JobController extends Controller
         $job->update($request->all());
         return response()->json($job, 200);
     }
+
+    public function delete(Job $job)
+    {
+        $job->delete();
+        return response()->json(null, 204);
+    }
 }
