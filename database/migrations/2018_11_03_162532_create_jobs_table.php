@@ -22,7 +22,7 @@ class CreateJobsTable extends Migration
             $table->string('arrival', 4);
             $table->string('category');
             $table->string('limitations');
-            $table->unsignedInteger('required_rank');
+            $table->unsignedInteger('required_rank_id')->default(0);
             $table->foreign('user_username')->references('username')->on('users');
         });
     }

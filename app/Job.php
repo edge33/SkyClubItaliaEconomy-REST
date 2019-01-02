@@ -21,11 +21,11 @@ class Job extends Model
     }
 
     public function getRequiredRankAttribute(){
-        return $this->attributes['required_rank'];
+        return $this->requiredRank()->get();
     }
 
     public function setRequiredRankAttribute($value) {
-        $this->attributes['required_rank'] = $value;
+        $this->requiredRank()->associate($value);
     }
 
     public function users () {
@@ -33,7 +33,7 @@ class Job extends Model
     }
 
     public function requiredRank () {
-        return $this->hasOne('App\Rank');
+        return $this->belongsTo('App\Rank');
     }
 
     public function requiredLicenses () {
