@@ -18,6 +18,7 @@ deploy:
   script:
   - composer install --optimize-autoloader --no-dev
   - zip -rq economy.zip . -x ".*" public/\* deploy-scripts/\*
+  - lftp -e  "set ftp:ssl-allow no; mrm /domains/skyclubitalia.it/EconomyREST/database/migrations/*;mrm  /domains/skyclubitalia.it/EconomyREST/database/seeds/*; bye" -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/EconomyREST/ economy.zip"
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/public_html/economy deploy-scripts/unzip.php deploy-scripts/migrate.php"
   - curl skyclubitalia.it/economy/unzip.php

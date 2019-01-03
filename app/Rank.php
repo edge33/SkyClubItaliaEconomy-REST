@@ -22,10 +22,10 @@ class Rank extends Model
     }
 
     public function user () {
-        return $this->belongsTo('App\User');
+        return $this->hasMany('App\User');
     }
 
     public function job () {
-        return $this->belongsTo('App\Job');
+        return $this->hasMany('App\Job');
     }
 }

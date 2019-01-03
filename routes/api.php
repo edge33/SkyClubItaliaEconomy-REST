@@ -36,3 +36,8 @@ Route::get('licenses/{license}', 'LicenseController@get');
 Route::post('licenses', 'LicenseController@save');
 Route::put('licenses/{license}', 'LicenseController@update');
 Route::delete('licenses/{license}', 'LicenseController@delete');
+
+Route::get('users', 'UserController@index');
+Route::get('users/{user}', 'UserController@get');
+Route::put('users/{user}', 'UserController@update');
+Route::delete('users/{user}', 'UserController@delete');

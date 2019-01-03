@@ -25,9 +25,9 @@ class UsersTableSeeder extends Seeder
         // And now, let's create a few users in our database:
         for ($i = 0; $i < 5; $i++) {
             User::create([
-                'username' => $faker->userName(),
+                'username' => "user_$i",
                 'pilot_callsign' => $faker->numerify('SCI###'),
-                'rank' => $ranks[rand ( 0 , $ranks->count()-1 )]->id,
+                'rank_id' => $ranks[rand ( 0 , $ranks->count()-1 )]->id,
                 'password' =>  $faker->md5()
             ]);
         }

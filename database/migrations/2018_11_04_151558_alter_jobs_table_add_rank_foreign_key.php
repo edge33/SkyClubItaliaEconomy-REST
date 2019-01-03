@@ -14,7 +14,7 @@ class AlterJobsTableAddRankForeignKey extends Migration
     public function up()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->foreign('required_rank')->references('id')->on('ranks');
+            $table->foreign('required_rank_id')->references('id')->on('ranks');
         });
     }
 

@@ -15,15 +15,15 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_username');
+            $table->unsignedInteger('user_id')->nullable();
             $table->string('title');
             $table->longText('description');
             $table->string('departure', 4);
             $table->string('arrival', 4);
             $table->string('category');
             $table->string('limitations');
-            $table->unsignedInteger('required_rank');
-            $table->foreign('user_username')->references('username')->on('users');
+            $table->unsignedInteger('required_rank_id')->default(0);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

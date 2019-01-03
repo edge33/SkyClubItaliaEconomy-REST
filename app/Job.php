@@ -7,33 +7,33 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     public $timestamps = false;
-    protected $appends = array('username', 'requiredRank');
-    protected $hidden = array('user_username', 'required_rank');
+    protected $appends = array('user', 'requiredRank');
+    protected $hidden = array('user_id', 'required_rank_id');
 
-    protected $fillable = ['username', 'title', 'description', 'departure', 'arrival', 'category', 'limitations', 'requiredRank'];
+    protected $fillable = ['user', 'title', 'description', 'departure', 'arrival', 'category', 'limitations', 'requiredRank'];
 
-    public function getUsernameAttribute(){
-        return $this->attributes['user_username'];
+    public function getUserAttribute(){
+        return $this->user()->first();
     }
 
-    public function setUsernameAttribute($value) {
-        $this->attributes['user_username'] = $value;
+    public function setUserAttribute($value) {
+        $this->user()->associate($value);
     }
 
-    public function getRequiredRankAttribute(){
-        return $this->attributes['required_rank'];
+    public function getRequiredRankAttribute() {
+        return $this->requiredRank()->first();
     }
 
     public function setRequiredRankAttribute($value) {
-        $this->attributes['required_rank'] = $value;
+        $this->requiredRank()->associate($value);
     }
 
-    public function users () {
+    public function user () {
         return $this->belongsTo('App\User');
     }
 
     public function requiredRank () {
-        return $this->hasOne('App\Rank');
+        return $this->belongsTo('App\Rank');
     }
 
     public function requiredLicenses () {
