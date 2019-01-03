@@ -14,10 +14,10 @@ class CreateLicenseUserTable extends Migration
     public function up()
     {
         Schema::create('license_user', function (Blueprint $table) {
-            $table->string('user_username');
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('license_id');
-            $table->primary(['user_username', 'license_id']);
-            $table->foreign('user_username')->references('username')->on('users')->onDelete('cascade');
+            $table->primary(['user_id', 'license_id']);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('license_id')->references('id')->on('licenses')->onDelete('cascade');
         });
     }

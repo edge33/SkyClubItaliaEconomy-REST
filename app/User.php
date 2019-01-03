@@ -17,8 +17,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'rank', 'callsign'
     ];
+
+    public function setCallsignAttribute($value) {
+        $this->attributes['pilot_callsign'] = $value;
+    }
+
+    public function getCallsignAttribute() {
+        return $this->attributes['pilot_callsign'];
+    }
+
+    public function setRankAttribute($value) {
+        $this->rank()->associate($value);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,11 +38,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'rank_id', 'pilot_callsign'
     ];
 
+    protected $appends = array('callsign');
+
     public function rank() {
-        return $this->hasOne('App\Rank');
+        return $this->belongsTo('App\Rank');
     }
 
     public function jobs(){
