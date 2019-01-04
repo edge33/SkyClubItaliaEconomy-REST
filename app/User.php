@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'rank', 'callsign'
+        'name', 'email', 'rank'
     ];
 
     public function setCallsignAttribute($value) {
@@ -32,6 +32,14 @@ class User extends Authenticatable
         $this->rank()->associate($value);
     }
 
+    public function getRankAttribute() {
+        return $this->rank()->first();
+    }
+
+    public function getLicensesAttribute() {
+        return $this->licenses()->get();
+    }
+    
     /**
      * The attributes that should be hidden for arrays.
      *

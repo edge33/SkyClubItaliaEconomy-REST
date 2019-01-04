@@ -24,6 +24,6 @@ deploy:
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/public_html/economy deploy-scripts/unzip.php deploy-scripts/migrate.php"
   - curl skyclubitalia.it/economy/unzip.php
   - curl skyclubitalia.it/economy/migrate.php
-  - lftp -e  "set ftp:ssl-allow no; rm /domains/skyclubitalia.it/public_html/economy/unzip.php /domains/skyclubitalia.it/public_html/economy/migrate.php; bye" -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it
+  - lftp -e  "set ftp:ssl-allow no; rm /domains/skyclubitalia.it/public_html/economy/unzip.php /domains/skyclubitalia.it/public_html/economy/migrate.php /domains/skyclubitalia.it/public_html/economy/cleanDatabase.php; bye" -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it
   - lftp -e  "set ftp:ssl-allow no; rm /domains/skyclubitalia.it/EconomyREST/economy.zip; bye" -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it
 

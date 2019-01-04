@@ -22,8 +22,8 @@ class CreateJobsTable extends Migration
             $table->string('arrival', 4);
             $table->string('category');
             $table->string('limitations');
-            $table->unsignedInteger('required_rank_id')->default(0);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('required_rank_id')->default(0)->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
