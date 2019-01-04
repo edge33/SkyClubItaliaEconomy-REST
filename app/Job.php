@@ -7,10 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     public $timestamps = false;
-    protected $appends = array('user', 'requiredRank');
     protected $hidden = array('user_id', 'required_rank_id');
-
-    protected $fillable = ['user', 'title', 'description', 'departure', 'arrival', 'category', 'limitations', 'requiredRank'];
+    protected $fillable = ['user', 'title', 'description', 'departure', 'arrival', 'category', 'limitations','requiredRank'];
+    protected $appends = ['requiredRank' , 'requiredLicenses','user'];
 
     public function getUserAttribute(){
         return $this->user()->first();
@@ -21,11 +20,15 @@ class Job extends Model
     }
 
     public function getRequiredRankAttribute() {
-        return $this->requiredRank()->first();
+        return $this->requiredRank()->get();
     }
 
     public function setRequiredRankAttribute($value) {
         $this->requiredRank()->associate($value);
+    }
+
+    public function getRequiredLicensesAttribute() {
+        return $this->requiredLicenses()->get();
     }
 
     public function user () {
@@ -39,4 +42,5 @@ class Job extends Model
     public function requiredLicenses () {
         return $this->belongsToMany('App\License');
     }
+
 }

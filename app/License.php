@@ -8,7 +8,7 @@ class License extends Model
 {
     public $timestamps = false;
 
-    protected $hidden = array('license_name');
+    protected $hidden = array('license_name', 'pivot');
     protected $appends = array('LicenseName');
     protected $fillable = array('licenseName');
 
