@@ -41,3 +41,5 @@ Route::get('users', 'UserController@index');
 Route::get('users/{user}', 'UserController@get');
 Route::put('users/{user}', 'UserController@update');
 Route::delete('users/{user}', 'UserController@delete');
+
+Route::post('login', 'Auth\LoginController@login');

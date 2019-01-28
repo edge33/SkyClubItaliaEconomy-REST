@@ -62,4 +62,12 @@ class User extends Authenticatable
     public function licenses() {
         return $this->belongsToMany('App\License');
     }
+
+    public function generateToken()
+    {
+        return str_random(60);
+        //$this->save();
+
+        //return $this->api_token;
+    }
 }
