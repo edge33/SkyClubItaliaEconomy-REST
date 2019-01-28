@@ -12,11 +12,18 @@ use App\Job;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group([
 
+    'middleware' => 'api',
+    'prefix' => 'auth'
 
+], function ($router) {
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
 });
 
 Route::get('jobs', 'JobController@index');
@@ -41,5 +48,3 @@ Route::get('users', 'UserController@index');
 Route::get('users/{user}', 'UserController@get');
 Route::put('users/{user}', 'UserController@update');
 Route::delete('users/{user}', 'UserController@delete');
-
-Route::post('login', 'Auth\LoginController@login');
