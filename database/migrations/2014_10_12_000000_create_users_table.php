@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username')->unique();
-            $table->string('pilot_callsign')->unique();
-            $table->unsignedInteger('rank_id')->default(0);
+            $table->string('pilot_callsign');
+            $table->unsignedInteger('rank_id')->nullable();
             $table->string('password');
         });
     }
