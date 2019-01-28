@@ -29,42 +29,12 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return response()->json($errors, 401);
-        }
         $credentials = $request->only('username', 'password');
-        $username = $credentials['username'];
-        $password = $credentials['password'];
-        $user = User::where("username", $username)->first();
-        if (is_null($user)) {
-            return response()->json([
-                'data' => 'wrong username or password'
-            ], 401);
-        }
-
-        $forumUser = ForumUser::where('username', $username)->first();
-        if (is_null($forumUser))
-            return response()->json([
-                'data' => 'wrong username or password'
-            ], 400);
-
-        $passwordHash = $forumUser->user_password;
-        if ($token = $this->guard()->attempt(["username" => $username, "password" => $password])) {
-            return $this->respondWithToken($token);
-        }
-
-        $credentials = $request->only('email', 'password');
 
         if ($token = $this->guard()->attempt($credentials)) {
             return $this->respondWithToken($token);
         }
-
+    
         return response()->json(['error' => 'Unauthorized'], 401);
     }
 
