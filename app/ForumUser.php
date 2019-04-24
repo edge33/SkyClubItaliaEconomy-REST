@@ -2,11 +2,12 @@
 
 namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Passport\HasApiTokens;
 
-class ForumUser extends Authenticatable  implements JWTSubject
+class ForumUser extends Authenticatable
 {
-
+    use HasApiTokens;
+    protected $primaryKey = 'user_id';
     /**
      * The Connection used to retrieve the model
      *
@@ -21,28 +22,11 @@ class ForumUser extends Authenticatable  implements JWTSubject
      */
     protected $table = 'phpbb_users';
 
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
-
     public function getAuthPassword() {
         return $this->user_password;
+    }
+
+    public function findForPassport($username) {
+        return $this->where('username', $username)->first();
     }
 }
