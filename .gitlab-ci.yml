@@ -3,6 +3,7 @@ image: tetraweb/php
 before_script:
 - git submodule sync --recursive
 - git submodule update --init --recursive
+- curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 - apt-get update
 - apt-get install zip unzip lftp
 - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
