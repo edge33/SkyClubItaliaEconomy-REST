@@ -29,6 +29,6 @@ class CreateJobLicenseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licenses_job');
+        Schema::dropIfExists('job_license');
     }
 }
