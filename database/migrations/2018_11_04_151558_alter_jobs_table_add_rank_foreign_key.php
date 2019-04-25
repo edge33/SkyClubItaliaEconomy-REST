@@ -25,6 +25,8 @@ class AlterJobsTableAddRankForeignKey extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('jobs', function (Blueprint $table) {
+            $table->dropForeign(['required_rank_id']);
+        });
     }
 }
