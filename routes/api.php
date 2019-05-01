@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users/{user}', 'UserController@get');
     Route::put('users/{user}', 'UserController@update');
     Route::delete('users/{user}', 'UserController@delete');
+    Route::post('assignJob/{user}', 'UserController@assignJob');
 
     Route::get('jobs', 'JobController@index');
     Route::get('jobs/{job}', 'JobController@get');
@@ -41,4 +42,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::delete('licenses/{license}', 'LicenseController@delete');
 
     Route::post('details', 'LoginController@details');
+    
 });
