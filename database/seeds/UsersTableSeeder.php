@@ -2,6 +2,7 @@
 
 use App\Rank;
 use App\User;
+use App\Role;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -21,13 +22,15 @@ class UsersTableSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         $ranks = Rank::all();
+        $roles = Role::all();
 
         // And now, let's create a few users in our database:
         for ($i = 0; $i < 5; $i++) {
             User::create([
                 'username' => "user_$i",
                 'pilot_callsign' => $faker->numerify('SCI###'),
-                'rank_id' => $ranks[rand ( 0 , $ranks->count()-1 )]->id
+                'rank_id' => $ranks[rand ( 0 , $ranks->count()-1 )]->id,
+                'role_id' => $roles[0]->id
             ]);
         }
     }

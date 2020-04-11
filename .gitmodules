@@ -1,3 +1,6 @@
 [submodule "deploy-scripts"]
 	path = deploy-scripts
 	url = ../deploy-scripts.git
+[submodule "laradock"]
+	path = laradock
+	url = https://github.com/Laradock/laradock.git

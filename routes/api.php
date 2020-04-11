@@ -13,15 +13,13 @@ use App\Job;
 |
 */
 
-
-Route::post('login', 'LoginController@login');
+Route::post('/login', 'AuthController@login');
 
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index');
     Route::get('users/{user}', 'UserController@get');
     Route::put('users/{user}', 'UserController@update');
     Route::delete('users/{user}', 'UserController@delete');
-    Route::post('assignJob/{user}', 'UserController@assignJob');
 
     Route::get('jobs', 'JobController@index');
     Route::get('jobs/{job}', 'JobController@get');
@@ -41,6 +39,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('licenses/{license}', 'LicenseController@update');
     Route::delete('licenses/{license}', 'LicenseController@delete');
 
-    Route::post('details', 'LoginController@details');
+    Route::post('details', 'AuthController@details');
+
+    Route::post('assignJob/{user}', 'JobAssignmentController@assignJob');
     
 });
