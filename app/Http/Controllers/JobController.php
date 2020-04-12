@@ -19,6 +19,8 @@ class JobController extends Controller
 
     public function save(Request $request)
     {
+        $this->checkAuthorization("create-data");
+
         $validator = Validator::make($request->all(), [
             'requiredRank' => 'exists:ranks,id',
             'requiredLicenses' => 'exists:licenses,id',
@@ -40,6 +42,8 @@ class JobController extends Controller
 
     public function update(Request $request, Job $job)
     {
+        $this->checkAuthorization("create-data");
+
         $validator = Validator::make($request->all(), [
             'requiredRank' => 'exists:ranks,id',
             'requiredLicenses' => 'exists:licenses,id',
@@ -61,6 +65,8 @@ class JobController extends Controller
 
     public function delete(Job $job)
     {
+        $this->checkAuthorization("create-data");
+
         $job->delete();
         return response()->json(null, 204);
     }

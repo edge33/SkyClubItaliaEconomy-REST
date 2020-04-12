@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 class JobAssignmentController extends Controller
 {
     public function assignJob(Request $request, User $user) {
+        $this->checkAuthorizationForModel('update-data', $user);
+
         $validator = Validator::make($request->all(), [
             'job' => 'required|exists:jobs,id'
         ]);

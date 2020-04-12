@@ -18,6 +18,7 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user) {
+        $this->checkAuthorizationForModel('update-data', $user);
 
         $validator = Validator::make($request->all(), [
             'rank' => 'exists:ranks,id',
@@ -38,6 +39,7 @@ class UserController extends Controller
 
     public function delete(User $user)
     {
+        $this->checkAuthorization('create-data');
         $user->delete();
         return response()->json(null, 204);
     }

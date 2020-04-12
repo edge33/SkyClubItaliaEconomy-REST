@@ -29,4 +29,8 @@ class ForumUser extends Authenticatable
     public function findForPassport($username) {
         return $this->where('username', $username)->first();
     }
+
+    public function getIdAttribute() {
+        return $this->user_id;
+    }
 }

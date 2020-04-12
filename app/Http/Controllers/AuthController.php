@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Rank;
 use App\User;
+use App\Role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +32,7 @@ class AuthController extends Controller
                 $callSign = $userData->pf_callsign;
             }
             $rank = Rank::find(1);
+            $role = Role::find(1);
 
             $skyUser = User::find($userId);
             if ($skyUser == null) {
@@ -39,6 +41,7 @@ class AuthController extends Controller
                 $skyUser->callSign = $callSign;
                 $skyUser->username = $username;
                 $skyUser->rank()->associate($rank);
+                $skyUser->role()->associate($role);
                 $skyUser->save();
             }
             $currentToken = $user->getAuthIdentifier();
