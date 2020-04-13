@@ -2,11 +2,16 @@
 
 namespace App\Providers;
 
+use App\Grants\ForumUserCustomGrant;
 use App\Traits\HandlesAdminAuthorization;
 use App\Traits\HandlesUpdateAuthorization;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Bridge\RefreshTokenRepository;
+use Laravel\Passport\Bridge\UserRepository;
 use Laravel\Passport\Passport;
+use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,9 +34,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        // Passport::routes();
+        Passport::routes();
         Passport::tokensExpireIn(now()->addDays(15));
         Passport::refreshTokensExpireIn(now()->addDays(30));
+
+        app(AuthorizationServer::class)->enableGrantType(
+            $this->makeCustomForumUserGrant(), Passport::tokensExpireIn()
+        );
 
         Gate::define('create-data', function($user) {
             return HandlesAdminAuthorization::isAdmin($user);
@@ -40,5 +49,16 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-data', function($user, $model) {
             return HandlesAdminAuthorization::isAdmin($user) || HandlesUpdateAuthorization::isUpdatingHimself($user, $model);
         });
+        
     }
+
+    protected function makeCustomForumUserGrant()
+    {
+        $grant = new ForumUserCustomGrant(
+            $this->app->make(RefreshTokenRepository::class),
+            $this->app->make(UserRepository::class)
+        );
+        return $grant;
+    }
+
 }

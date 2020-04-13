@@ -6,7 +6,7 @@ use App\ForumUser;
 use App\User;
 use Tests\TestCase;
 
-class JobAssignTest extends TestCase
+class JobAssignTestAsUser extends TestCase
 {
     /**
      * A basic test example.

@@ -13,8 +13,6 @@ use App\Job;
 |
 */
 
-Route::post('/login', 'AuthController@login');
-
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index');
     Route::get('users/{user}', 'UserController@get');
@@ -41,6 +39,5 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::post('details', 'AuthController@details');
 
-    Route::post('assignJob/{user}', 'JobAssignmentController@assignJob');
-    
+    Route::post('assignJob/{user}', 'JobAssignmentController@assignJob');    
 });
