@@ -16,7 +16,7 @@ class JobAssignTestAsAdmin extends TestCase
      */
     public function testAssignJobToPilotasAdmin()
     {
-        $user = ForumUser::find(65);
+        $user = ForumUser::find(99);
         $this->actingAs($user, 'api');
         $id = $user->user_id;
         $response = $this->json('POST', "/api/assignJob/$id", ['job' => '1']);

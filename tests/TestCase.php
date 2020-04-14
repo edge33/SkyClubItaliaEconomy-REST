@@ -19,7 +19,7 @@ abstract class TestCase extends BaseTestCase
         Artisan::call('db:seed');
         Artisan::call('passport:install');
         $user = new User();
-        $user->id = 174;
+        $user->id = 99;
         $user->username = 'adminUser';
         $user->pilot_callsign = 'SCI000';
         $user->rank()->associate(Rank::find(1));
@@ -27,7 +27,7 @@ abstract class TestCase extends BaseTestCase
         $user->save();
 
         $user = new User();
-        $user->id = 65;
+        $user->id = 100;
         $user->username = 'genericUser';
         $user->pilot_callsign = 'SCI001';
         $user->rank()->associate(Rank::find(1));

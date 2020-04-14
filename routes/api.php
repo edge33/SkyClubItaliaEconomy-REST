@@ -13,6 +13,8 @@ use App\Job;
 |
 */
 
+Route::post('login', 'AuthController@login');
+
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users', 'UserController@index');
     Route::get('users/{user}', 'UserController@get');
