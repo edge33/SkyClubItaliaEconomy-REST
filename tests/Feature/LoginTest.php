@@ -17,7 +17,7 @@ class LoginTest extends TestCase
     {
         $response = $this->json('POST', '/api/login', [
             'username' => 'edge33',
-            'password' => 'maidaf',
+            'password' => 'admin',
         ]);
         $response->assertStatus(200);
         $user = User::where('username', 'edge33')->get()->first();
