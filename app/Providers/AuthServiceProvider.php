@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Grants\ForumUserCustomGrant;
 use App\Traits\HandlesAdminAuthorization;
 use App\Traits\HandlesUpdateAuthorization;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -35,13 +34,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         //Passport::routes();
-        Passport::tokensExpireIn(now()->addDays(15));
-        Passport::refreshTokensExpireIn(now()->addDays(30));
-
+        //Passport::tokensExpireIn(now()->addDays(15));
+        //Passport::refreshTokensExpireIn(now()->addDays(30));
         $server = $this->app->make(\League\OAuth2\Server\AuthorizationServer::class);
         $server->enableGrantType(new \Laravel\Passport\Bridge\PersonalAccessGrant(), new \DateInterval('P15D'));
-
-
         Gate::define('create-data', function($user) {
             return HandlesAdminAuthorization::isAdmin($user);
         });
