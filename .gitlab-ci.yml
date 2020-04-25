@@ -22,6 +22,8 @@ deploy:
   - mv .env.example .env
   - composer install --optimize-autoloader --no-dev
   - php artisan key:generate
+  - php artisan config:cache
+  - php artisan route:cache
   - zip -rq economy.zip . -x ".*" "*.md" public/\* development/\* deploy-scripts/\* laradock/\* tests/\* storage/\*.key "*.js" "*.json" "*.lock" "phpunit.xml" 
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST;  put -O ./domains/skyclubitalia.it/public_html/economy deploy-scripts/cleanDatabase.php"
   - curl skyclubitalia.it/economy/cleanDatabase.php
