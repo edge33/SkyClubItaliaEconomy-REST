@@ -10,7 +10,8 @@ before_script:
 - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 - php composer-setup.php
 - php -r "unlink('composer-setup.php');"
-- php composer.phar install
+- openssl genrsa -out storage/oauth-private.key 4096
+- openssl rsa -in storage/oauth-private.key -pubout > storage/oauth-public.key
 
 
 deploy:
@@ -18,8 +19,6 @@ deploy:
    refs:
     - master
   script:
-  - openssl genrsa -out storage/oauth-private.key 4096
-  - openssl rsa -in storage/oauth-private.key -pubout > storage/oauth-public.key
   - composer install --optimize-autoloader --no-dev
   - zip -rq economy.zip . -x ".*" "*.md" public/\* deploy-scripts/\* laradock/\* tests/\* storage/\*.key "*.js" "*.json" "*.lock" "*.sh" "phpunit.xml" 
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/public_html/economy deploy-scripts/cleanDatabase.php"
