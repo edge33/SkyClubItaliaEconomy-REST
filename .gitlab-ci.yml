@@ -20,7 +20,6 @@ deploy:
     - master
   script:
   - mv .env.example .env
-  - php artisan key:generate
   - composer install --optimize-autoloader --no-dev
   - php artisan config:cache
   - zip -rq economy.zip . -x ".*" "*.md" public/\* deploy-scripts/\* laradock/\* tests/\* storage/\*.key "*.js" "*.json" "*.lock" "*.sh" "phpunit.xml" 
