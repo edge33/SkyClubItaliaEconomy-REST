@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropColumnPasswordFromUsers extends Migration
+class DropPassowdResetTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class DropColumnPasswordFromUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('password');
-        });
+        Schema::drop('password_resets');
     }
 
     /**
@@ -25,8 +23,10 @@ class DropColumnPasswordFromUsers extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('password', 191);
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->$table->string('email', 191)->unique();
+            $table->$table->string('token', 191);
+            $table->$table->timestamp('created_at');
         });
     }
 }
