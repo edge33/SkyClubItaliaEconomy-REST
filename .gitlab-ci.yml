@@ -19,7 +19,7 @@ deploy:
     - master
   script:
   - composer install --optimize-autoloader --no-dev
-  - zip -rq economy.zip . -x ".*" public/\* deploy-scripts/\*
+  - zip -rq economy.zip . -x ".*" "*.md" public/\* deploy-scripts/\* laradock/\* tests/\* "*.js" "*.json" "*.lock" "*.sh" "phpunit.xml"
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/public_html/economy deploy-scripts/cleanDatabase.php"
   - curl skyclubitalia.it/economy/cleanDatabase.php
   - lftp -c "set ftp:ssl-allow no; open -u $FTP_USERNAME,$FTP_PASSWORD skyclubitalia.it;  put -O ./domains/skyclubitalia.it/EconomyREST/ economy.zip"
