@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Rank;
+use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -17,16 +18,20 @@ abstract class TestCase extends BaseTestCase
         parent::setUp();
         Artisan::call('db:seed');
         Artisan::call('passport:install');
-        $user = new User([
-            'id' => '174',
-            'username' => 'testuser',
-            'pilot_callsign' => 'SCI000',
-            'rank_id' => 1
-        ]);
-        $user->id = 174;
-        $user->username = 'testuser';
+        $user = new User();
+        $user->id = 99;
+        $user->username = 'adminUser';
         $user->pilot_callsign = 'SCI000';
         $user->rank()->associate(Rank::find(1));
+        $user->role()->associate(Role::find(2));
+        $user->save();
+
+        $user = new User();
+        $user->id = 100;
+        $user->username = 'genericUser';
+        $user->pilot_callsign = 'SCI001';
+        $user->rank()->associate(Rank::find(1));
+        $user->role()->associate(Role::find(1));
         $user->save();
     }
 }

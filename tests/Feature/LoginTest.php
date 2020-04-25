@@ -15,11 +15,13 @@ class LoginTest extends TestCase
      */
     public function testLogin()
     {
-
-        $response = $this->json('POST', '/api/login', ['username' => 'testuser', 'password' => 'maidaf']);
+        $response = $this->json('POST', '/api/login', [
+            'username' => 'edge33',
+            'password' => 'admin',
+        ]);
         $response->assertStatus(200);
-        $user = User::where('username', 'testuser')->get()->first();
-        self::assertEquals($user->username, 'testuser');
+        $user = User::where('username', 'edge33')->get()->first();
+        self::assertEquals($user->username, 'edge33');
         self::assertEquals($user->rank->id, 1);
     }
 }

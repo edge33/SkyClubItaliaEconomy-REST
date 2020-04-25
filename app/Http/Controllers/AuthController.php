@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Rank;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-class LoginController extends Controller
+class AuthController extends Controller
 {
-
     /**
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
@@ -40,12 +39,22 @@ class LoginController extends Controller
                 $skyUser->rank()->associate($rank);
                 $skyUser->save();
             }
-            $success['token'] =  $user->createToken('economyRest')->accessToken;
-            return response()->json(['success' => $success], 200);
+            $currentToken = $user->getAuthIdentifier();
+
+            $tokenResult = $user->createToken('Personal Access Token');
+            $token = $tokenResult->token;
+            return response()->json([
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $token->expires_at
+                )->toDateTimeString()
+            ]);
         }
 
         return response()->json(['error' => 'Unauthorised'], 401);
     }
+
 
     /**
      * details api
@@ -55,7 +64,6 @@ class LoginController extends Controller
     public function details()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user], $this-> successStatus);
+        return response()->json(['success' => $user], $this->successStatus);
     }
-
 }

@@ -6,7 +6,7 @@ use App\ForumUser;
 use App\User;
 use Tests\TestCase;
 
-class JobAssignTest extends TestCase
+class JobAssignTestAsAdmin extends TestCase
 {
     /**
      * A basic test example.
@@ -14,9 +14,9 @@ class JobAssignTest extends TestCase
      * @param $
      * @return void
      */
-    public function testAssignJobToPilot()
+    public function testAssignJobToPilotasAdmin()
     {
-        $user = ForumUser::find(174);
+        $user = ForumUser::find(99);
         $this->actingAs($user, 'api');
         $id = $user->user_id;
         $response = $this->json('POST', "/api/assignJob/$id", ['job' => '1']);
