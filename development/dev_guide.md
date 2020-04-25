@@ -79,7 +79,7 @@ In order to test the Auth against phpBB tables, add the following tables to the 
 
 ## Build the app and prepare for usage
 
-Before running **composer** to install dependencies, it is mandatory to generate the RSA keys in advance. You can use the following script to generate the keys, run DB migrations, install Passport for API authentication and run the app.
+Before running **composer** to install dependencies, it is mandatory to generate the RSA keys in advance. You can use the following script to generate the keys, run DB migrations, install Passport for API authentication and run the app. Run it from the project root.
 
 ```
 #!/bin/bash
