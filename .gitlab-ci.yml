@@ -15,9 +15,6 @@ before_script:
 
 
 deploy:
-  only:
-   refs:
-    - master
   script:
   - mv .env.example .env
   - composer install --optimize-autoloader --no-dev
