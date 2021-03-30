@@ -13,7 +13,7 @@ class DropPassowdResetTable extends Migration
      */
     public function up()
     {
-        Schema::drop('password_resets');
+        Schema::dropIfExists('password_resets');
     }
 
     /**
@@ -24,9 +24,9 @@ class DropPassowdResetTable extends Migration
     public function down()
     {
         Schema::create('password_resets', function (Blueprint $table) {
-            $table->$table->string('email', 191)->unique();
-            $table->$table->string('token', 191);
-            $table->$table->timestamp('created_at');
+            $table->string('email', 191)->unique();
+            $table->string('token', 191);
+            $table->timestamp('created_at');
         });
     }
 }
