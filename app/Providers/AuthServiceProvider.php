@@ -33,11 +33,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        //Passport::routes();
+        Passport::routes();
         //Passport::tokensExpireIn(now()->addDays(15));
         //Passport::refreshTokensExpireIn(now()->addDays(30));
-        $server = $this->app->make(\League\OAuth2\Server\AuthorizationServer::class);
-        $server->enableGrantType(new \Laravel\Passport\Bridge\PersonalAccessGrant(), new \DateInterval('P15D'));
+        // $server = $this->app->make(\League\OAuth2\Server\AuthorizationServer::class);
+        // $server->enableGrantType(new \Laravel\Passport\Bridge\PersonalAccessGrant(), new \DateInterval('P15D'));
         Gate::define('create-data', function($user) {
             return HandlesAdminAuthorization::isAdmin($user);
         });
